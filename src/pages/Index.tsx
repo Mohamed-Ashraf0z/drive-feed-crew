@@ -1,13 +1,40 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AppProvider } from '@/contexts/AppContext';
+import { Navbar } from '@/components/Navbar';
+import { Sidebar } from '@/components/Sidebar';
+import { PostFeed } from '@/components/PostFeed';
+import { CarMascot } from '@/components/CarMascot';
+import { CreatePostModal } from '@/components/CreatePostModal';
+import { FloatingCreateButton } from '@/components/FloatingCreateButton';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <AppProvider>
+        <div className="min-h-screen bg-background">
+          <Navbar />
+          
+          <div className="flex">
+            <Sidebar />
+            <PostFeed />
+            <CarMascot />
+          </div>
+
+          <CreatePostModal />
+          <FloatingCreateButton />
+        </div>
+      </AppProvider>
+    </QueryClientProvider>
   );
 };
 

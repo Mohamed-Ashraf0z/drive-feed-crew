@@ -47,6 +47,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Car-themed custom colors
+        car: {
+          blue: "hsl(var(--car-blue))",
+          navy: "hsl(var(--car-navy))",
+          gray: "hsl(var(--car-gray))",
+          light: "hsl(var(--car-light))",
+          accent: "hsl(var(--car-accent))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
