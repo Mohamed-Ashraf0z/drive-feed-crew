@@ -3,10 +3,12 @@ import { Search, User, Settings, Car } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useApp } from '@/contexts/AppContext';
 import { useToast } from '@/hooks/use-toast';
+import { Link, useNavigate } from 'react-router-dom';
 
 export function Navbar() {
   const { state, dispatch } = useApp();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleAuthAction = () => {
     if (state.isAuthenticated) {
@@ -40,10 +42,7 @@ export function Navbar() {
         variant: "destructive",
       });
     } else {
-      toast({
-        title: "Profile",
-        description: "Profile page coming soon!",
-      });
+      navigate('/profile');
     }
   };
 
@@ -52,24 +51,24 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
             <Car className="w-6 h-6 text-car-accent" />
             <h1 className="text-xl font-bold">Serstation</h1>
-          </div>
+          </Link>
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-6">
-            <button className="text-sm hover:text-car-accent transition-colors">
-              Loca Bar
-            </button>
+            <Link to="/" className="text-sm hover:text-car-accent transition-colors">
+              Home
+            </Link>
+            <Link to="/cars" className="text-sm hover:text-car-accent transition-colors">
+              Cars
+            </Link>
             <button 
               onClick={handleProfileClick}
               className="text-sm hover:text-car-accent transition-colors"
             >
-              Profiles
-            </button>
-            <button className="text-sm hover:text-car-accent transition-colors">
-              Car Info
+              Profile
             </button>
           </div>
 
